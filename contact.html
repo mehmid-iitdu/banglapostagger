@@ -1,0 +1,220 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Bangla Pos Tagger</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css'%}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link href="{% static 'vendor/magnific-popup/magnific-popup.css'%}" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/freelancer.min.css'%}" rel="stylesheet">
+    <link href="{% static 'css/custom.css'%}" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Bangla Pos Tagger</a>
+        <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Pos Tagger
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1 ">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'about' %}">About</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'resource' %}">Resource</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1 ">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'stats' %}">Stats</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1 active">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'contact' %}">Contact</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item mx-0 mx-lg-1 ">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'logout' %}">Logout</a>
+            </li>
+          
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Header -->
+    
+    <!-- Portfolio Grid Section -->
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 contact">
+          <br>
+            <h3>Contact Us</h3>
+            
+              <div class="">
+                <form action="/action_page.php">
+                  <label for="fname">First Name</label>
+                  <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+                  <label for="lname">Email</label>
+                  <input type="text" id="lname" name="Email" placeholder="Your Email..">
+
+                  
+                  <label for="lname">Mobile Number</label>
+                  <input type="text" id="lname" name="mobile" placeholder="Your Mobile Number..">
+                  <label for="lname">Subject</label>
+                  <input type="text" id="lname" name="Subject" placeholder="Your Subject ..">
+
+                  <label for="subject">Message</label>
+                  <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+
+                  <input type="submit" class="subbutton" value="Submit">
+                </form>
+              </div>
+            
+          </div>
+
+          <div class="col-md-4 sidebar">
+          <br>
+          <h3>Pos Tagger</h3>
+          <hr/>
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+              {% for tagger in pos_tagger_list %}
+              <div class="panel panel-default" style="background-color:{{tagger.color}};">
+                 <div class="panel-heading" role="tab" id="heading{{tagger.id}}">
+                    <h4 class="panel-title">
+                       <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{tagger.id}}" aria-expanded="true" aria-controls="collapse{{tagger.id}}">
+                           {{ tagger.name }}
+                       </a>
+                    </h4>
+                 </div>
+                 <div id="collapse{{tagger.id}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{tagger.id}}">
+                    <div class="panel-body">
+                       {{ tagger.description }}
+                    </div>
+                 </div>
+              </div>
+              {% endfor %}
+        </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+   
+
+    <!-- Footer -->
+    <footer class="footer text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-5 mb-lg-0">
+            <h4 class="text-uppercase mb-4">Location</h4>
+            <p class="lead mb-0">Dhaka
+              <br>Bangladesh</p>
+          </div>
+          <div class="col-md-4 mb-5 mb-lg-0">
+            <h4 class="text-uppercase mb-4">Around the Web</h4>
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                  <i class="fab fa-fw fa-facebook-f"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                  <i class="fab fa-fw fa-google-plus-g"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                  <i class="fab fa-fw fa-twitter"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                  <i class="fab fa-fw fa-linkedin-in"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                  <i class="fab fa-fw fa-dribbble"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h4 class="text-uppercase mb-4">About Bangla POS Tagger</h4>
+            <p class="lead mb-0"> An Academic Project, PGDIT 2018
+              <br/>
+              <a href="http://softitsecurity.com">IIT, Dhaka University</a></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div class="copyright py-4 text-center text-white">
+      <div class="container">
+        <small>&copy; 2019 Copyright  <a href="">AshikMahamud</a> </small>
+      </div>
+    </div>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-to-top d-lg-none position-fixed ">
+      <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top">
+        <i class="fa fa-chevron-up"></i>
+      </a>
+    </div>
+
+    
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js'%}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+    <script src="{% static 'vendor/magnific-popup/jquery.magnific-popup.min.js'%}"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="{% static 'js/jqBootstrapValidation.js'%}"></script>
+    <script src="{% static 'js/contact_me.js'%}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{% static 'js/freelancer.min.js'%}"></script>
+
+
+    <script type="text/javascript">
+    
+      $('#myCollapsible').on('hidden.bs.collapse', function () {
+        toggle: false
+      })
+    </script>
+
+  </body>
+
+</html>
