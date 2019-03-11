@@ -1,0 +1,18 @@
+{% block title %}Sign Up{% endblock %}
+
+{% block javascript %}
+  <script>
+    $("#id_username").change(function () {
+      console.log( $(this).val() );
+    });
+  </script>
+{% endblock %}
+
+{% block content %}
+  <h2>Ajax</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Sign up</button>
+  </form>
+{% endblock %}
