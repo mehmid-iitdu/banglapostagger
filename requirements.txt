@@ -20,7 +20,7 @@ feedparser==5.2.1
 idna==2.7
 Markdown==3.0.1
 Pygments==2.3.1
-PyJWT==1.6.4
+PyJWT==2.4.0
 python-dateutil==2.7.3
 pytz==2018.5
 requests==2.19.1
